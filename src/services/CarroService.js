@@ -35,5 +35,26 @@ module.exports = {
                 aceito(results.insertCodigo);
             })
         })
+    },
+
+    alterar: (codigo,modelo,placa) =>{
+        return new Promise((aceito,rejeitado)=>{
+
+            db.query('UPDATE carros SET modelo = ? , placa = ?, where codigo = ?',[modelo,placa,codigo], (error,results)=>{
+                if (error) {rejeitado(error); return}
+                aceito(results);
+            })
+        })
+    },
+
+    
+    exckuir: (codigo) =>{
+        return new Promise((aceito,rejeitado)=>{
+
+            db.query('DELETE FROM carros where codigo = ?',[codigo], (error,results)=>{
+                if (error) {rejeitado(error); return}
+                aceito(results);
+            })
+        })
     }
 };
